@@ -28,6 +28,7 @@ public class RBNode<T extends Comparable<T>> {
     }
 
     //打印节点的关键值和颜色信息
+    @Override
     public String toString(){
         return ""+key+(this.color);
     }

@@ -1,16 +1,13 @@
-package com.answer.thread.chapter1and2;/**
- * @Author: suchao
- * @Description:
- * @Date Create in 11:30 2017/12/7
- * @Modified by:
- */
+package com.answer.thread.chapter1and2;
+
 
 /**
- * @author Administrator
+ * @author suchao
  * @description
- * @create 11:30
+ * @create Create in 11:30 2017/12/7
  **/
 public class CreatThread implements Runnable{
+    @Override
     public void run() {
         System.out.println("oh , i am runnable!");
     }

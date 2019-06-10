@@ -2,6 +2,7 @@ package com.answer.thread.chapter1and2;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author answer
@@ -11,6 +12,7 @@ import java.util.Map;
 public class HashMapMultiThread {
 
     static Map<String , String> map = new HashMap<>();
+    static ConcurrentHashMap<String, String> concurrentHashMap = new ConcurrentHashMap<>();
 
     public static class AddThread implements Runnable {
 
@@ -20,8 +22,10 @@ public class HashMapMultiThread {
         }
         @Override
         public void run() {
-            for (int i = 0; i < 100000 ; i+=2) {
+            for (int i = 0; i < 30 ; i++) {
                 map.put(Integer.toString(i) , Integer.toBinaryString(i));
+                System.out.println("size=" + map.size());
+                concurrentHashMap.put(Integer.toString(i), Integer.toBinaryString(i));
             }
         }
     }

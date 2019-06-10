@@ -1,7 +1,5 @@
 package com.answer.stack;
 
-import org.junit.Test;
-
 import java.util.Stack;
 
 /**

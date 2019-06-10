@@ -12,7 +12,7 @@ public class ArrayListMultiThread {
 
     static ArrayList<Integer> al = new ArrayList<>(10);
 
-//    static Vector<Integer> vt = new Vector<>();
+    static Vector<Integer> vt = new Vector<>();
 
     public static class AddThread implements Runnable {
 
@@ -20,6 +20,7 @@ public class ArrayListMultiThread {
         public void run() {
             for (int i = 0 ; i < 1000000; i++) {
                 al.add(i);
+                vt.add(i);
             }
         }
     }
@@ -31,6 +32,6 @@ public class ArrayListMultiThread {
         t2.start();
         t1.join();
         t2.join();
-        System.out.println(al.size());
+        System.out.println(vt.size());
     }
 }
