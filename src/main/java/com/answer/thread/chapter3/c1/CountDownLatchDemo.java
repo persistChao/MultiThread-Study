@@ -16,11 +16,13 @@ public class CountDownLatchDemo implements Runnable {
     static final CountDownLatch end = new CountDownLatch(10);
     static final CountDownLatchDemo demo = new CountDownLatchDemo();
 
+    @Override
     public void run() {
         try {
             //模拟检查任务
             Thread.sleep(new Random().nextInt(10) * 1000);
             System.out.println("check complete");
+            //相当于10-1
             end.countDown();
             System.out.println("count = " + end.getCount());
         } catch (InterruptedException e) {
@@ -33,7 +35,7 @@ public class CountDownLatchDemo implements Runnable {
         for (int i = 0; i < 10; i++) {
             exec.submit(demo);
         }
-        //等待检查
+        //等待检查 等待完成后执行
         end.await();
         System.out.println("等待完成count = " + end.getCount());
         System.out.println("Fire!");
@@ -44,6 +46,7 @@ public class CountDownLatchDemo implements Runnable {
     public void testCountDownLatch() {
         final CountDownLatch latch = new CountDownLatch(2);
         Thread t = new Thread(new Runnable() {
+            @Override
             public void run() {
                 try {
                     System.out.println("子线程" + Thread.currentThread().getName() + "正在执行");
