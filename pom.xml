@@ -41,7 +41,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.22</version>
+            <version>1.2.25</version>
         </dependency>
         <!-- Disruptor 框架是Lmax公司开发的一款高效的无锁的内存队列 环形队列 -->
         <dependency>
