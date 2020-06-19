@@ -3,9 +3,7 @@ package com.answer.thread.chapter3.c1;
 import org.junit.Test;
 
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @author answer
@@ -30,7 +28,7 @@ public class CountDownLatchDemo implements Runnable {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService exec = Executors.newFixedThreadPool(10);
         for (int i = 0; i < 10; i++) {
             exec.submit(demo);
@@ -53,6 +51,7 @@ public class CountDownLatchDemo implements Runnable {
                     Thread.sleep(3000);
                     System.out.println("子线程"+Thread.currentThread().getName()+"执行完毕");
                     latch.countDown();
+                    System.out.println("count1="+latch.getCount());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -60,12 +59,14 @@ public class CountDownLatchDemo implements Runnable {
         });
         t.start();
         new Thread() {
+            @Override
             public void run() {
                 try {
                     System.out.println("子线程" + Thread.currentThread().getName() + "正在执行");
                     Thread.sleep(3000);
                     System.out.println("子线程" + Thread.currentThread().getName() + "执行完毕");
                     latch.countDown();
+                    System.out.println("count2=" + latch.getCount());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

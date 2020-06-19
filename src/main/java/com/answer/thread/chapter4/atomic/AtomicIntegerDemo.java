@@ -8,12 +8,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class AtomicIntegerDemo {
     static AtomicInteger i = new AtomicInteger();
+//    static int i = 0;
 
     public static class AddThread implements Runnable {
         @Override
         public void run() {
             for (int k = 0; k < 10000; k++) {
                 i.incrementAndGet();
+//                i++;
             }
         }
     }

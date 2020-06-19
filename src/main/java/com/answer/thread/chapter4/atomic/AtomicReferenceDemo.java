@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Created by chao on 2018/3/17.
  */
 public class AtomicReferenceDemo {
-    public static AtomicReference<Integer> money = new AtomicReference<Integer>();
+    public static AtomicReference<Integer> money = new AtomicReference<>();
     //设置账户初始值小于20 ， 显然这是一个需要被充值的账户
     public static void main(String[] args) {
         money.set(19);

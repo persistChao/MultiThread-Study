@@ -23,7 +23,7 @@ public class CyclicBarrierDemo {
         public void run() {
             try {
                 //等待所有（10个）士兵到齐
-//                System.out.println(Thread.currentThread().getName() + "集合！");
+                System.out.println(Thread.currentThread().getName() + "集合！");
                 cyclic.await();
                 doWork();
                 //等待所有士兵完成工作

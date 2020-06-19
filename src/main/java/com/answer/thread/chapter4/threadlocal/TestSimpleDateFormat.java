@@ -25,18 +25,20 @@ public class TestSimpleDateFormat {
             this.i = i;
         }
 
-        public void run() {
-            try {
-                Date t = sdf.parse("2018-02-28 21:20:" + i % 60);
-                System.out.println(i + ":" + t);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
+//        @Override
+//        public void run() {
+//            try {
+//                Date t = sdf.parse("2018-02-28 21:20:" + i % 60);
+//                System.out.println(i + ":" + t);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         /**
          * 解决方案1 使用重入锁
          */
+//        @Override
 //        public void run() {
 //            try {
 //                lock.lock();
@@ -44,7 +46,7 @@ public class TestSimpleDateFormat {
 //                System.out.println(i + ":" + t);
 //            } catch (ParseException e) {
 //                e.printStackTrace();
-//            }finally {
+//            } finally {
 //                lock.unlock();
 //            }
 //        }
@@ -52,16 +54,17 @@ public class TestSimpleDateFormat {
         /**
          * 解决方案2 使用synchronized 同步快
          */
-//        public void run() {
-//            try {
-//                synchronized (sdf) {
-//                    Date t = sdf.parse("2018-02-28 21:20:" + i % 60);
-//                    System.out.println(i + ":" + t);
-//                }
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        @Override
+        public void run() {
+            try {
+                synchronized (sdf) {
+                    Date t = sdf.parse("2018-02-28 21:20:" + i % 60);
+                    System.out.println(i + ":" + t);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {

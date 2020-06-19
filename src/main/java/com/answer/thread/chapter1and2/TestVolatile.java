@@ -14,6 +14,7 @@ public class TestVolatile {
     private static volatile int i = 0;
     public static class PlusTask implements Runnable{
 
+        @Override
         public void run() {
             for (int k=0 ; k < 1000 ; k++) {
                 i++;

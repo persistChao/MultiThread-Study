@@ -12,6 +12,7 @@ public class AtomicIntegerArrayDemo {
         @Override
         public void run() {
             for (int k = 0; k < 10000; k++) {
+                System.out.println(k % arr.length());
                 arr.getAndIncrement(k % arr.length());
             }
         }
