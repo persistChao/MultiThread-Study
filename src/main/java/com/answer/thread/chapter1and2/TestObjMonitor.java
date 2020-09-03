@@ -1,17 +1,14 @@
 package com.answer.thread.chapter1and2;/**
- * @Author: suchao
- * @Description:
- * @Date Create in 15:46 2017/12/8
- * @Modified by:
- */
+
 
 /**
+ *
+ * notify wait 必须跟随synchronized一起使用
  * @author Administrator
- * @description
- * @create 15:46
+ *
+ * @date 15:46
  **/
 public class TestObjMonitor {
-
 
     private final static Object obj = new Object();
 

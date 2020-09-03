@@ -33,6 +33,12 @@ public class SemaphoreDemo implements Runnable {
         for (int i = 0 ; i < 20 ; i++) {
             exec.submit(demo);
         }
+
+//        int n = 18;
+//        Semaphore semaphore = new Semaphore(3);
+//        for (int i  = 0; i < n ; i ++) {
+//            new Worker(i , semaphore).start();
+//        }
     }
 
 
@@ -42,8 +48,8 @@ public class SemaphoreDemo implements Runnable {
      */
     @Test
     public void testSemaphore() {
-        int n = 8;
-        Semaphore semaphore = new Semaphore(5);
+        int n = 18;
+        Semaphore semaphore = new Semaphore(3);
         for (int i  = 0; i < n ; i ++) {
             new Worker(i , semaphore).start();
         }
@@ -60,7 +66,7 @@ public class SemaphoreDemo implements Runnable {
             try {
                 semaphore1.acquire();
                 System.out.println("工人 " + this.num + " 占用一个机器生产。。。");
-//                Thread.sleep(2000);
+                Thread.sleep(1000);
                 System.out.println("工人 " + this.num + " 释放机器");
                 semaphore1.release();
             }catch (InterruptedException e) {
