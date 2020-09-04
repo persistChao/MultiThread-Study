@@ -7,9 +7,9 @@ package com.answer.thread.test;
  */
 public class PrintAB implements Runnable{
 
-    private String name;
-    private Object prev;
-    private Object self;
+    private final String name;
+    private final Object prev;
+    private final Object self;
 
     public PrintAB(String name, Object prev, Object self) {
         this.name = name;
@@ -37,18 +37,121 @@ public class PrintAB implements Runnable{
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Object a = new Object();
-        Object b = new Object();
-        Object c = new Object();
-        PrintAB pa = new PrintAB("A",c,a);
-        PrintAB pb = new PrintAB("B",a,b);
-        PrintAB pc = new PrintAB("C",b,c);
+//        Object a = new Object();
+//        Object b = new Object();
+//        Object c = new Object();
+//        PrintAB pa = new PrintAB("A",c,a);
+//        PrintAB pb = new PrintAB("B",a,b);
+//        PrintAB pc = new PrintAB("C",b,c);
+//
+//        new Thread(pa,"t1").start();
+//        Thread.sleep(10);
+//        new Thread(pb,"t2").start();
+//        Thread.sleep(10);
+//        new Thread(pc,"t3").start();
+//        Thread.sleep(10);
 
-        new Thread(pa,"t1").start();
+        Printer p = new Printer();
+        PrintA pa = new PrintA("a");
+        PrintB pb = new PrintB("b");
+
+        Thread t1 = new Thread(pa);
+        Thread t2 = new Thread(pb);
+        t1.setName("线程1");
+        t2.setName("线程2");
+        t1.start();
         Thread.sleep(10);
-        new Thread(pb,"t2").start();
-        Thread.sleep(10);
-        new Thread(pc,"t3").start();
-        Thread.sleep(10);
+        t2.start();
+    }
+
+
+    public static class Printer implements  Runnable{
+
+        private final Object object = new Object();
+        int i =1;
+        @Override
+        public void run() {
+            while (i<=100) {
+                synchronized (object) {
+                    object.notifyAll();
+                    try {
+                        Thread.sleep(115);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName() + " = " + i);
+                    i++;
+                    try {
+                        object.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    private  static final Object obj = new Object();
+
+    public static class PrintA implements Runnable{
+        private String value ;
+
+
+        public PrintA(String value){
+            this.value = value;
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                synchronized (obj){
+                    System.out.print(value);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    obj.notifyAll();
+                    try {
+                        obj.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+    }
+
+    public static class PrintB implements Runnable{
+        private String value ;
+
+
+        public PrintB(String value){
+            this.value = value;
+        }
+
+        @Override
+        public void run() {
+            while (true){
+                synchronized (obj){
+                    System.out.print(value);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    obj.notifyAll();
+                    try {
+                        obj.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
     }
 }
