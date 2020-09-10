@@ -25,7 +25,7 @@ public class DeadLockDemo {
                     }
                 }
             }
-        });
+        },"t1");
 
         Thread t2 = new Thread(new Runnable() {
             @Override
@@ -36,8 +36,13 @@ public class DeadLockDemo {
                     }
                 }
             }
-        });
+        },"t2");
         t1.start();
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         t2.start();
     }
 

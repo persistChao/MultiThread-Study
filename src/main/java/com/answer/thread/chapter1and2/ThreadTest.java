@@ -24,4 +24,12 @@ public class ThreadTest {
         };
         t1.start();
     }
+
+    public static void main(String[] args) {
+        Long a = 1000l;
+        Long b = 1000l;
+
+        System.out.println(a == b);
+        System.out.println(a.equals(b));
+    }
 }

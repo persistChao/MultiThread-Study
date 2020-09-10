@@ -20,8 +20,9 @@ public class TwoThreadAlternatePrint {
                     } else {
                         System.out.print("B ");
                     }
-                    i++;
                     try {
+                        Thread.sleep(100);
+                        i++;
                         object.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -35,8 +36,10 @@ public class TwoThreadAlternatePrint {
         Printer printer = new Printer();
         Thread t1 = new Thread(printer);
         Thread t2 = new Thread(printer);
+        t1.setName("线程1");
         t1.start();
         Thread.sleep(100);
+        t2.setName("线程2");
         t2.start();
     }
 }
