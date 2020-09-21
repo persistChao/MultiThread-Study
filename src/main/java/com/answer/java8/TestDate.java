@@ -1,4 +1,4 @@
-package com.answer.java8.timedate;
+package com.answer.java8;
 
 import com.google.common.base.Stopwatch;
 import org.junit.Test;
